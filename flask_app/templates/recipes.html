@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Recipes {% endblock %}
+{% block link %} <a href="/recipes/new">Create Recipe</a> {% endblock %}
+{% block content %}
+<h3>All posted recipes</h3>
+<table>
+    <thead>
+        <th class="pe-2">Name:</th>
+        <th class="pe-2">Under 30 minutes:</th>
+        <th class="pe-2">Posted by:</th>
+        <th class="pe-2">Actions:</th>
+    </thead>
+    <tbody>
+        {% for recipe in recipes %}
+        <tr>
+            <td class="pe-2">{{recipe.name}}</td>
+            <td class="pe-2">{{recipe.under_30}}</td>
+            <td class="pe-2">{{recipe.creator.first_name}}</td>
+            <td>
+                <a href="/recipes/{{recipe.id}}">View Recipe</a>
+                {% if recipe.user_id == user.id %}
+                <span> | </span><a href="/recipes/edit/{{recipe.id}}">Edit</a>
+                <span> | </span><a href="/delete/{{recipe.id}}">Delete</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

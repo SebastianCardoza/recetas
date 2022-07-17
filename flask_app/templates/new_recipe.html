@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}New Recipe ! {% endblock %}
+{% block link %} <a href="/recipes">Back to Recipes</a>{% endblock %}
+{% block content %}
+<h2 class="my-3">Add a New Recipe!</h2>
+<form class="row pt-3" action="/process" method="post">
+    {% with messages = get_flashed_messages(category_filter=['new_recipe']) %}
+        {% if messages %}
+            {% for message in messages %}
+            <p class="text-danger">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <input type="hidden" name="type" value="new_recipe">
+    <input type="hidden" name="user_id" value={{user.id}}>
+    
+    <div class="col-7">
+        <label class='col-4 mb-4' for="name">Name:</label>
+        <input class='col-5 ms-2 mb-4' type="text" name="name">
+        <div class="col-2"></div>
+        <label class='col-4 mb-4 align-top' for="description">Description:</label>
+        <textarea class='col-5 ms-2 mb-4' name="description" rows="3"></textarea>
+        <div class="col-2"></div>
+        <label class='col-4 mb-4 align-top' for="instructions">Instructions:</label>
+        <textarea class='col-5 ms-2 mb-4' name="instructions" rows="3"></textarea>
+        <div class="col-2"></div>
+    </div>
+    <div class="col-4">
+        <label class='col-6 mb-4' for="cooked_date">Date cooked/made:</label>
+        <input class='col-6 ps-2 mb-4' type="date" name="cooked_date" required>
+        <div class="col-2"></div>
+        <label class='col-10 mb-4' for="under_30">Under 30 minutes?:</label>
+        <input class='col-2 ps-2 mb-4' type="radio" name="under_30" value="Yes" required><label for="Yes">Yes</label> 
+        <input class='col-2 ps-2 mb-4' type="radio" name="under_30" value="No"><label for="No">No</label> 
+        <div class="col-6 d-flex justify-content-end">
+            <input class="px-2" type="submit">
+        </div>
+    </div>
+</form>
+{% endblock %}

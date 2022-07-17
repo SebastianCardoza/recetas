@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} {{recipe.name}} {% endblock %}
+{% block link %} <a href="/recipes">Back to Recipes</a>{% endblock %}
+{% block content %}
+<div class="row">
+    <h2 class="col-8">{{recipe.name}}</h2> 
+    <p class="col-4 text-end">Posted by: {{recipe.creator.first_name}}</p>
+</div>
+<div class="row">
+    <p class="col-3 mb-3">Description:</p>
+    <p class="col-9">{{recipe.description}}</p>
+    <p class="col-3 mb-3">Under 30 minutes?</p>
+    <p class="col-9">{{recipe.under_30}}</p>
+    <p class="col-3 mb-3">Instructions:</p>
+    <p class="col-9">{{recipe.instructions}}</p>
+    <p class="col-3 mb-3">Date Made:</p>
+    <p class="col-9">{{recipe.cooked_date}}</p>
+</div>
+{% endblock %}
